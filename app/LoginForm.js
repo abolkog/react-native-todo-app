@@ -1,40 +1,54 @@
 //Import needed libraries
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View } from 'react-native';
 
-//Create Component
+import { Button, Card, CardItem, Input } from './common';
+
 class LoginForm extends Component {
 
   constructor() {
     super();
     this.state = {
-      title: 'Title from state'
+      username: '',
+      password: ''
     };
+  }
+
+  _onLoginPressed() {
+    console.log(`User Name is : ${this.state.username} and Password is ${this.state.password}`)
   }
 
   render(){
     return (
-      <View style={styles.header}>
-        <Text style={styles.text}>
-          Login Page
-        </Text>
-      </View>
+      <Card>
+
+        <CardItem>
+          <Input
+            label='Email'
+            placeholder='Enter your email'
+            secureTextEntry={false}
+            onChangeText={(username) => this.setState({ username  }) }
+          />
+        </CardItem>
+
+        <CardItem>
+          <Input
+            label='Password'
+            placeholder='Enter your Password'
+            secureTextEntry={true}
+            onChangeText={(password) => this.setState({ password }) }
+          />
+        </CardItem>
+
+        <CardItem>
+          <Button onPress={this._onLoginPressed.bind(this)}>Login</Button>
+        </CardItem>
+
+      </Card>
     );
   }
+
 }
 
-const styles = StyleSheet.create({
-    header: {
-      backgroundColor: '#efefef',
-      height: 80,
-      alignItems: 'center', //Horizontal Alignment
-      justifyContent: 'center', //Vertical Alignments
-    },
-    text: {
-      fontSize: 15,
-      fontWeight: 'bold'
-    }
-});
 
-//Export the component to be aviable for other components in the apps
 export default LoginForm;
