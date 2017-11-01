@@ -1,8 +1,10 @@
 //Import needed libraries
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
 
-import { Button, Card, CardItem, Input } from './common';
+import { connect } from 'react-redux';
+import { loginUser } from './actions';
+
+import { Button, Card, CardItem, Input, Spinner } from './common';
 
 class LoginForm extends Component {
 
@@ -15,9 +17,18 @@ class LoginForm extends Component {
   }
 
   _onLoginPressed() {
-    console.log(`User Name is : ${this.state.username} and Password is ${this.state.password}`)
+    const { username, password } = this.state;
+    this.props.loginUser({ username, password });
   }
 
+  _renderButton() {
+    if (this.props.loading) {
+      return <Spinner />;
+    }
+    return (
+      <Button onPress={this._onLoginPressed.bind(this)}>Login</Button>
+    );
+  }
   render(){
     return (
       <Card>
@@ -41,7 +52,7 @@ class LoginForm extends Component {
         </CardItem>
 
         <CardItem>
-          <Button onPress={this._onLoginPressed.bind(this)}>Login</Button>
+            { this._renderButton() }
         </CardItem>
 
       </Card>
@@ -50,5 +61,12 @@ class LoginForm extends Component {
 
 }
 
+const mapStateToProps = state => {
+  return {
+    error: state.auth.error,
+    loading: state.auth.loading,
+    user: state.auth.user
+  }
+}
 
-export default LoginForm;
+export default connect(mapStateToProps, { loginUser })(LoginForm);

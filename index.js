@@ -1,6 +1,5 @@
 //Import needed libraries
-import React from 'react';
-import { Text, View, AppRegistry } from 'react-native';
+import { AppRegistry } from 'react-native';
 import App from './app/App';
 
 //Rendering on the device
