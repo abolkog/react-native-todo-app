@@ -1,13 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const CardItem = (props) => {
-  return(
-    <View style={styles.cardItem}>
-      { props.children }
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   cardItem: {
@@ -19,5 +12,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 });
+
+const CardItem = (props) => {
+  return(
+    <View style={styles.cardItem}>
+      { props.children }
+    </View>
+  );
+};
+
 
 export { CardItem };

@@ -5,6 +5,15 @@ import { connect } from 'react-redux';
 import { loginUser } from './actions';
 import { Button, Card, CardItem, Input, Spinner } from './common';
 
+const styles = StyleSheet.create({
+  errorStyle: {
+    fontSize: 17,
+    alignSelf: 'center',
+    color: 'red'
+  }
+});
+
+
 class LoginForm extends Component {
 
   constructor() {
@@ -69,13 +78,6 @@ class LoginForm extends Component {
 
 }
 
-const styles = StyleSheet.create({
-  errorStyle: {
-    fontSize: 17,
-    alignSelf: 'center',
-    color: 'red'
-  }
-});
 
 const mapStateToProps = state => {
   return {

@@ -1,14 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const Card = (props) => {
-  return(
-    <View style={styles.cardStyle}>
-      { props.children }
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   cardStyle: {
     marginLeft: 5,
@@ -22,5 +14,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1
   }
 });
+
+
+const Card = (props) => {
+  return(
+    <View style={styles.cardStyle}>
+      { props.children }
+    </View>
+  );
+};
 
 export { Card };

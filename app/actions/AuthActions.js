@@ -6,6 +6,25 @@ import {
 
 import axios from 'axios';
 
+
+const onLoginSuccess = (dispatch, user, token) => {
+  //TODO: Work with the token
+  dispatch({ type: LOGIN_SUCCESS, user })
+};
+
+const onLoginFailed = (dispatch, errorMessage) => {
+  dispatch({ type: LOGIN_FAILED, error: errorMessage})
+};
+
+
+const handleResponse = (dispatch, data) => {
+  if (!data.success) {
+    onLoginFailed(dispatch, data.message);
+  }else {
+    onLoginSuccess(dispatch, data.user, data.token)
+  }
+}
+
 export const loginUser = ({ username, password }) => {
   return (dispatch) => {
     dispatch({ type: LOGIN_ATTEMPT });
@@ -19,20 +38,3 @@ export const loginUser = ({ username, password }) => {
 
   };
 }
-
-const handleResponse = (dispatch, data) => {
-  if (!data.success) {
-    onLoginFailed(dispatch, data.message);
-  }else {
-    onLoginSuccess(dispatch, data.user, data.token)
-  }
-}
-
-const onLoginSuccess = (dispatch, user, token) => {
-  //TODO: Work with the token
-  dispatch({ type: LOGIN_SUCCESS, user })
-};
-
-const onLoginFailed = (dispatch, errorMessage) => {
-  dispatch({ type: LOGIN_FAILED, error: errorMessage})
-};

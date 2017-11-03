@@ -1,14 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 
-const Spinner = () => {
-  return (
-    <View style={styles.spinner}>
-      <ActivityIndicator size={ 'large' }/>
-    </View>
-  );
-}
-
 const styles = StyleSheet.create({
   spinner: {
     flex: 1,
@@ -16,5 +8,14 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 });
+
+
+const Spinner = () => {
+  return (
+    <View style={styles.spinner}>
+      <ActivityIndicator size={ 'large' }/>
+    </View>
+  );
+}
 
 export { Spinner }

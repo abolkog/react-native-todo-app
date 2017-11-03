@@ -1,23 +1,6 @@
 import React from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
 
-const Input = (props) => {
-  return (
-    <View style={styles.inputContainer}>
-
-      <Text style={styles.label}>{props.label}</Text>
-
-      <TextInput
-        placeholder={props.placeholder}
-        secureTextEntry={props.secureTextEntry}
-        autoCorrect={false}
-        autoCapitalize='none'
-        onChangeText={props.onChangeText}
-        style={styles.input} />
-    </View>
-  );
-};
-
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
@@ -39,4 +22,23 @@ const styles = StyleSheet.create({
   }
 
 });
+
+const Input = (props) => {
+  return (
+    <View style={styles.inputContainer}>
+
+      <Text style={styles.label}>{props.label}</Text>
+
+      <TextInput
+        placeholder={props.placeholder}
+        secureTextEntry={props.secureTextEntry}
+        autoCorrect={false}
+        autoCapitalize='none'
+        onChangeText={props.onChangeText}
+        style={styles.input} />
+    </View>
+  );
+};
+
+
 export { Input }
