@@ -1,7 +1,38 @@
+import {
+  LOGIN_ATTEMPT,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED
+} from './types';
+
+import axios from 'axios';
 
 export const loginUser = ({ username, password }) => {
-  console.log(`${username} and password ${password}`);
-  return {
-    type: 'login_attempt'
+  return (dispatch) => {
+    dispatch({ type: LOGIN_ATTEMPT });
+
+    //Call the back-end API
+    //Please do not spam/abuse it so others can use it as well.
+    axios.post('https://mean-app-tutorial.herokuapp.com/users/auth',
+    { email: username, password })
+      .then(resp => handleResponse(dispatch, resp.data))
+      .catch(error => console.error(error));
+
+  };
+}
+
+const handleResponse = (dispatch, data) => {
+  if (!data.success) {
+    onLoginFailed(dispatch, data.message);
+  }else {
+    onLoginSuccess(dispatch, data.user, data.token)
   }
 }
+
+const onLoginSuccess = (dispatch, user, token) => {
+  //TODO: Work with the token
+  dispatch({ type: LOGIN_SUCCESS, user })
+};
+
+const onLoginFailed = (dispatch, errorMessage) => {
+  dispatch({ type: LOGIN_FAILED, error: errorMessage})
+};

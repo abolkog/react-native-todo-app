@@ -17,7 +17,8 @@ const RootNavigator = StackNavigator({
   Home: {
       screen: Home,
       navigationOptions: {
-        title: 'Home'
+        title: 'Home',
+        headerLeft: false
       }
   }
 

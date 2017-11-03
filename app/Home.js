@@ -1,8 +1,6 @@
 //Import needed libraries
 import React, { Component } from 'react';
-import { View } from 'react-native';
-
-import Button from './common/Button';
+import { View, Text } from 'react-native';
 
 //Create Component
 class Home extends Component {
@@ -14,11 +12,7 @@ class Home extends Component {
   render(){
     return (
       <View>
-        <Button
-          onPress={ this._onLoginPressed.bind(this) }
-          >
-            Login
-          </Button>
+        <Text>Home Screen</Text>
       </View>
     );
   }

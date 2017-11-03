@@ -1,9 +1,8 @@
-//Import needed libraries
 import React, { Component } from 'react';
-
+import { Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { loginUser } from './actions';
 
+import { loginUser } from './actions';
 import { Button, Card, CardItem, Input, Spinner } from './common';
 
 class LoginForm extends Component {
@@ -14,6 +13,12 @@ class LoginForm extends Component {
       username: '',
       password: ''
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user) {
+      this.props.navigation.navigate('Home');
+    }
   }
 
   _onLoginPressed() {
@@ -29,6 +34,7 @@ class LoginForm extends Component {
       <Button onPress={this._onLoginPressed.bind(this)}>Login</Button>
     );
   }
+
   render(){
     return (
       <Card>
@@ -46,7 +52,7 @@ class LoginForm extends Component {
           <Input
             label='Password'
             placeholder='Enter your Password'
-            secureTextEntry={true}
+            secureTextEntry
             onChangeText={(password) => this.setState({ password }) }
           />
         </CardItem>
@@ -55,11 +61,21 @@ class LoginForm extends Component {
             { this._renderButton() }
         </CardItem>
 
+        <Text style={styles.errorStyle}>{this.props.error}</Text>
+
       </Card>
     );
   }
 
 }
+
+const styles = StyleSheet.create({
+  errorStyle: {
+    fontSize: 17,
+    alignSelf: 'center',
+    color: 'red'
+  }
+});
 
 const mapStateToProps = state => {
   return {
