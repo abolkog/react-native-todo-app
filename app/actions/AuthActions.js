@@ -4,12 +4,16 @@ import {
   LOGIN_FAILED
 } from './types';
 
+import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 
 
 const onLoginSuccess = (dispatch, user, token) => {
-  //TODO: Work with the token
-  dispatch({ type: LOGIN_SUCCESS, user })
+
+  AsyncStorage.setItem('app_token',token)
+    .then(() => {
+      dispatch({ type: LOGIN_SUCCESS, user })
+    });
 };
 
 const onLoginFailed = (dispatch, errorMessage) => {

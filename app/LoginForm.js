@@ -24,6 +24,7 @@ class LoginForm extends Component {
     };
   }
 
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.user) {
       this.props.navigation.navigate('Home');
