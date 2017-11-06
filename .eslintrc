@@ -10,6 +10,7 @@
       "import/prefer-default-export": 0,
       "no-use-before-define": 1,
       "arrow-body-style": 0,
-      "react-native/no-color-literals": 0
+      "react-native/no-color-literals": 0,
+      "react/jsx-handler-names": 0,
   }
 }
