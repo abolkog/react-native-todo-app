@@ -1,6 +1,8 @@
 //Import needed libraries
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity, AsyncStorage } from 'react-native';
+import {
+  View, Text, FlatList, TouchableOpacity,
+   AsyncStorage, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 
 import { ListItem, Spinner } from './common';
@@ -12,21 +14,31 @@ class Home extends Component {
 
   static navigationOptions = ({ navigation }) => {
       const logoutBtnStyle = { paddingLeft: 10 };
+      const addBtnStyle = { paddingRight: 10 };
       const { params = {} } = navigation.state;
+
       const headerLeft = (
         <TouchableOpacity style={logoutBtnStyle} onPress={params.logout}>
           <Text>Logout</Text>
         </TouchableOpacity>
+      );
+
+      const headerRight = (
+        <TouchableOpacity style={addBtnStyle}
+          onPress={() => navigation.navigate('AddTask')}>
+          <Text>Add Task</Text>
+        </TouchableOpacity>
 
       );
 
-      return { headerLeft };
+      return { headerLeft, headerRight };
     };
 
   componentDidMount() {
     this.props.navigation.setParams({ logout: this._logout.bind(this) });
     this.props.fetchTasks();
   }
+
 
   _logout() {
     AsyncStorage.removeItem('app_token');
@@ -37,17 +49,26 @@ class Home extends Component {
     return <ListItem name={item.name} status={item.done} />
   }
 
-  render(){
-    if (this.props.loading) {
-      return <Spinner />
-    }
+  _onRefreshTasks() {
+    this.props.fetchTasks();
+  }
 
+  render(){
+    // if (this.props.loading) {
+    //   return <Spinner />
+    // }
     return (
       <View style={{ flex: 1 }}>
         <FlatList
           data={this.props.tasks}
           renderItem={this._renderListItem}
           keyExtractor={item => item._id }
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.loading}
+              onRefresh={this._onRefreshTasks.bind(this)}
+            />
+          }
         />
       </View>
     );

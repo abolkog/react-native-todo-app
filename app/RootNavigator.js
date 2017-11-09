@@ -7,6 +7,7 @@ import { StackNavigator } from 'react-navigation';
 import Home from './Home';
 import LoginForm from './LoginForm';
 import Splash from './Splash';
+import AddTask from './AddTask';
 
 const RootNavigator = StackNavigator({
   Splash: {
@@ -27,6 +28,12 @@ const RootNavigator = StackNavigator({
       screen: Home,
       navigationOptions: {
         title: 'Home'
+      }
+  },
+  AddTask: {
+      screen: AddTask,
+      navigationOptions: {
+        title: 'Add New Task'
       }
   }
 
